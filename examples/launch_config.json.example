@@ -1,0 +1,120 @@
+{
+  "_comment": "Example launch_config.json — adapted from skill/templates/launch_config.json.template. Copy to your project root as launch_config.json (or _launch_config.json) and edit. Consumed by every script in skill/scripts/.",
+
+  "title": "My Book Title",
+  "subtitle": "A One-Line Subtitle or Tagline",
+  "author": "Your Name",
+  "author_display": "YOUR NAME",
+  "publisher": "Your Name",
+  "year": "2026",
+  "language": "en",
+  "isbn": "",
+
+  "copyright_text": "Copyright © 2026 Your Name. All rights reserved.\n\nNo part of this book may be reproduced, stored in a retrieval system, or transmitted in any form or by any means — electronic, mechanical, photocopying, recording, or otherwise — without prior written permission of the author, except for brief quotations used in reviews.\n\nThis is a work of fiction. Names, characters, places, and incidents either are the product of the author's imagination or are used fictitiously. Any resemblance to actual persons, living or dead, events, or locales is coincidental.\n\nFirst edition, 2026.",
+
+  "tagline_lines": [
+    "A first italic tagline line.",
+    "A second italic tagline line.",
+    "A third italic tagline line."
+  ],
+
+  "keywords": [
+    "thriller",
+    "suspense",
+    "mystery",
+    "psychological",
+    "page-turner",
+    "debut novel",
+    "fiction"
+  ],
+
+  "bisac_code": "FIC031000",
+
+  "paths": {
+    "manuscript_md": "Manuscript.md",
+    "build_md": "_build_book.md",
+    "prompts_dir": "prompts/chapters",
+    "color_images_dir": "images/chapters",
+    "bw_images_dir": "images/chapters-bw",
+    "ref_images_dir": "ref_images",
+    "covers_dir": "covers",
+    "dist_dir": "dist",
+    "social_dir": "social",
+    "visual_companion_pdf": "visual-companion.pdf"
+  },
+
+  "protagonist": {
+    "_comment": "canonical_ref is the default reference. strong_refs is the multi-ref override for chapters where one image isn't enough to anchor identity.",
+    "name": "Jane Protagonist",
+    "canonical_ref": "ref_images/protagonist1.png",
+    "strong_refs": [
+      "ref_images/protagonist1.png",
+      "ref_images/protagonist2.png",
+      "ref_images/protagonist3.png"
+    ]
+  },
+
+  "chapters": [
+    {
+      "_comment": "slug = filename stem in prompts/ and images/. manuscript_header = the literal H2 line that begins this chapter in Manuscript.md.",
+      "slug": "ch00-prologue",
+      "display_title": "Prologue",
+      "manuscript_header": "## PROLOGUE",
+      "has_protagonist": false,
+      "use_strong_refs": false,
+      "custom_refs": ["ref_images/antagonist1.png"]
+    },
+    {
+      "slug": "ch01-opening",
+      "display_title": "Chapter 1: The Opening",
+      "manuscript_header": "## CHAPTER 1:",
+      "has_protagonist": true,
+      "use_strong_refs": false
+    },
+    {
+      "slug": "ch02-rising-action",
+      "display_title": "Chapter 2: Rising Action",
+      "manuscript_header": "## CHAPTER 2:",
+      "has_protagonist": true,
+      "use_strong_refs": true
+    }
+  ],
+
+  "cover": {
+    "front_art_path": "covers/front-cover-art.png",
+    "back_art_path": "covers/back-cover-art.png",
+    "front_final_path": "covers/front-cover.jpg",
+    "back_final_path": "covers/back-cover.jpg",
+    "spine": {
+      "title": "MY BOOK TITLE",
+      "author": "YOUR NAME",
+      "color_hex": "#c9a227",
+      "bg_color_top_hex": "#0a0a0f",
+      "bg_color_bottom_hex": "#19120a"
+    }
+  },
+
+  "social": {
+    "_comment": "Hashtag and copy strings used by build_social_pack.py.",
+    "hashtag": "#MyBookTitle",
+    "quotes": [
+      "A first pull-quote from the book.",
+      "A second pull-quote from the book.",
+      "A third pull-quote from the book."
+    ],
+    "premise": "One-paragraph elevator pitch suitable for a premise card.",
+    "comp_titles_lead": "IF YOU LOVED GONE GIRL...",
+    "comp_titles_follow": "...{TITLE} will be your next obsession.",
+    "social_proof_quote": "",
+    "social_proof_source": ""
+  },
+
+  "pdf_metadata": {
+    "title": "My Book Title",
+    "author": "Your Name",
+    "subject": "A one-line description / subtitle",
+    "keywords": "thriller, suspense, mystery",
+    "producer": "kdp-book-generator + kdp-book-launch",
+    "creator": "Your Name"
+  }
+}

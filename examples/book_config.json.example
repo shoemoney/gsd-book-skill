@@ -1,0 +1,79 @@
+{
+  "_comment": "Example book_config.json — adapted from skill/templates/book_config.json.template. Copy to your project root as book_config.json (or _book_config.json) and edit. Consumed by kdp-book-generator to build EPUB/PDF.",
+
+  "title": "My Book Title",
+  "subtitle": "A One-Line Subtitle or Tagline",
+  "author": "Your Name",
+  "publisher": "Your Name",
+  "language": "en",
+  "subject": "FIC031000",
+  "keywords": [
+    "thriller",
+    "suspense",
+    "mystery"
+  ],
+  "format": {
+    "name": "6\" x 9\"",
+    "width": 6,
+    "height": 9,
+    "unit": "in"
+  },
+  "margins": {
+    "top": 0.625,
+    "bottom": 0.625,
+    "inside": 0.875,
+    "outside": 0.625,
+    "unit": "in"
+  },
+  "typography": {
+    "body": {
+      "family": "EB Garamond",
+      "size": 11,
+      "lineHeight": 1.45,
+      "weight": "normal",
+      "style": "normal",
+      "color": "#000000",
+      "marginTop": 0,
+      "marginBottom": 8
+    },
+    "heading1": {
+      "family": "EB Garamond",
+      "size": 26,
+      "lineHeight": 1.25,
+      "weight": "bold",
+      "style": "normal",
+      "color": "#000000",
+      "marginTop": 48,
+      "marginBottom": 24
+    },
+    "heading2": {
+      "family": "EB Garamond",
+      "size": 16,
+      "lineHeight": 1.3,
+      "weight": "bold",
+      "style": "normal",
+      "color": "#000000",
+      "marginTop": 28,
+      "marginBottom": 14
+    },
+    "heading3": {
+      "family": "EB Garamond",
+      "size": 13,
+      "lineHeight": 1.3,
+      "weight": "bold",
+      "style": "italic",
+      "color": "#000000",
+      "marginTop": 22,
+      "marginBottom": 10
+    }
+  },
+  "pageNumbers": {
+    "enabled": true,
+    "startPage": 1,
+    "format": "decimal",
+    "position": "footer",
+    "alignment": "center"
+  },
+  "tableOfContents": true,
+  "bleed": false
+}
