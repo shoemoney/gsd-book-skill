@@ -35,3 +35,4 @@ social/
 
 # OpenRouter response dumps
 /tmp/back-cover-response.json
+.planning/
