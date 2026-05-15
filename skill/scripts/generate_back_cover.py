@@ -105,7 +105,7 @@ def main():
         headers={
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
-            "HTTP-Referer": "https://github.com/local/kdp-book-launch",
+            "HTTP-Referer": "https://github.com/shoemoney/gsd-book-skill",
             "X-Title": f"{cfg.get('title','Book')} back cover gen",
         },
         method="POST",
