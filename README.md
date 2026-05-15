@@ -37,11 +37,26 @@ The skill is **genre-agnostic** — works for thrillers, memoirs, self-help, fic
 
 **Total OpenRouter spend for a 21-chapter book: ~$4.** (Verified production cost.)
 
+## Repo layout
+
+```
+gsd-book-skill/
+├── skill/                ← the installable Claude skill (this is what you symlink)
+│   ├── SKILL.md          ← runbook Claude loads when triggered
+│   ├── scripts/          ← Python toolkit (11 scripts + 1 shared loader)
+│   ├── templates/        ← prompt + config templates with {{PLACEHOLDERS}}
+│   └── references/       ← methodology docs
+├── examples/             ← (planned) generic walkthroughs
+└── ... README, LICENSE, CONTRIBUTING, etc.
+```
+
+The entire `skill/` folder is the installable unit. Symlink it to `~/.claude/skills/kdp-book-launch/` and Claude will pick it up.
+
 ## What the skill provides
 
 **Skill content** at `skill/SKILL.md` — Claude loads this when you ask it to launch a book on KDP. Walks Claude through the 5-phase workflow with clear gates for user decisions.
 
-**Scripts** at `scripts/`:
+**Scripts** at `skill/scripts/`:
 
 | Script | Purpose |
 |--------|---------|
@@ -56,9 +71,9 @@ The skill is **genre-agnostic** — works for thrillers, memoirs, self-help, fic
 | `compose_cover_wrap.py` | Full paperback + hardcover wrap PDFs at KDP dimensions |
 | `build_social_pack.py` | 50+ social media graphics (PIL only, no API spend) |
 
-**Templates** at `templates/` — prompt templates (chapter image / cover / editorial / KDP listing) that you fill in for your book.
+**Templates** at `skill/templates/` — prompt templates (chapter image / cover / editorial / KDP listing) that you fill in for your book.
 
-**References** at `references/` — methodology docs that explain how and why:
+**References** at `skill/references/` — methodology docs that explain how and why:
 
 - `editorial-review-methodology.md` — HIGH/MEDIUM/LOW severity classification
 - `likeness-audit-methodology.md` — auditing AI image consistency against ref photos
@@ -75,13 +90,17 @@ The skill is **genre-agnostic** — works for thrillers, memoirs, self-help, fic
 
 ```bash
 # Clone the repo
-git clone https://github.com/shoemoney/gsd-book-skill ~/gsd-book-skill
+git clone https://github.com/shoemoney/gsd-book-skill ~/Projects/gsd-book-skill
 
-# Install the skill at the user level (or symlink for development)
-ln -s ~/gsd-book-skill/skill ~/.claude/skills/gsd-book-skill
+# Install the skill at the user level via symlink
+ln -s ~/Projects/gsd-book-skill/skill ~/.claude/skills/kdp-book-launch
+
+# Verify Claude can see it
+ls ~/.claude/skills/kdp-book-launch/      # should list SKILL.md + scripts/ + templates/ + references/
 
 # In your book project, start the workflow
 cd ~/Projects/my-book
+
 # Then in Claude Code:
 #   "Launch my book on KDP"
 # Claude will load this skill and walk you through the 5 phases.
