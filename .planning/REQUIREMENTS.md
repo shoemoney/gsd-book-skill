@@ -100,7 +100,32 @@ A maintainer (TÂCHES or designated triager) leaves an **approving review** on t
 
 ## Traceability
 
-(Populated by `gsd-roadmapper` when ROADMAP.md is generated.)
+| REQ-ID | Phase | Notes |
+|--------|-------|-------|
+| POLISH-01 | 1 | `requirements.txt` with Pillow + pypdf + `python>=3.10` floor |
+| POLISH-02 | 1 | README Requirements/Install section documents `pandoc`, headless Chrome, ImageMagick 7+ |
+| POLISH-03 | 1 | Populated `examples/` fixture — public-domain text + minimal configs, no API keys required |
+| POLISH-04 | 1 | Real public-repo `HTTP-Referer` URL in all 3 OpenRouter callers |
+| POLISH-05 | 1 | Remove committed `skill/scripts/__pycache__/`; add to `.gitignore` |
+| AUDIT-01 | 1 | Insert `## Enhancement PR` first H2 in `PR_BODY.md`; verify all 8 required headings in order |
+| AUDIT-02 | 1 | `PR_TITLE.txt` = `docs(NNNN): list gsd-book-skill in Community table` with `NNNN` as marked placeholder |
+| AUDIT-03 | 1 | Strip "expand the Community section" / category-expansion framing from issue + PR body |
+| AUDIT-04 | 1 | Re-verify `README_DIFF.md` is a clean single-row diff vs current upstream `main` |
+| ISSUE-01 | 2 | File Enhancement issue via `enhancement.yml` template; paste `STEP1_DISCUSSION_POST.md` verbatim; tick every pre-submission checkbox |
+| ISSUE-02 | 2 | Capture returned issue number in STATE.md for downstream substitution |
+| ISSUE-03 | 2 | Block on `approved-enhancement` label; no upstream-fork branching, no upstream edits, no draft PR |
+| ISSUE-04 | 2 | Day-14 / day-28 / day-42 watchpoints; Path-4 fallback ready at day-42 |
+| PR-01 | 3 | Fork upstream; branch `docs/<issue#>-list-gsd-book-skill-in-community-table` (matches `auto-branch.yml`) |
+| PR-02 | 3 | Apply `README_DIFF.md` exactly — one row, no translated READMEs, no CI, no drive-by formatting |
+| PR-03 | 3 | Generate `.changeset/<slug>.md` via `node scripts/changeset/new.cjs --type Added --pr <#> --body "..."` |
+| PR-04 | 3 | Single conventional commit `docs(<issue#>): list gsd-book-skill in Community table`; `Closes #<issue#>` in body |
+| PR-05 | 3 | Open via `?template=PULL_REQUEST_TEMPLATE/enhancement.md`; not draft; all 8 H2 headings; no default-template markers |
+| PR-06 | 3 | Follow-up `chore: pin changeset pr field to #<PR#>` if assigned PR number differs from baked-in `--pr` value |
+| ITER-01 | 4 | Address CodeRabbit pre-merge findings (out-of-scope, security, conventional-title) before human reviewer round |
+| ITER-02 | 4 | Translated-README ask → cite L130 "one concern per PR"; offer pre-drafted follow-up issue |
+| ITER-03 | 4 | CI ask → acknowledge, scope out, defer to post-merge hardening milestone |
+| ITER-04 | 4 | Any other scope expansion → scope out + follow-up issue; hold single-row diff line |
+| ITER-05 | 4 | Capture approving-review SHA in STATE.md as milestone DoD signal |
 
 ---
 *Last updated: 2026-05-15 after research synthesis*
