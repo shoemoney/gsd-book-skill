@@ -133,12 +133,21 @@ cd ~/Projects/my-book
 
 ## Requirements
 
-- macOS or Linux (developed on macOS; should work on Linux with same brew/apt tooling)
-- Python 3.10+ with `pypdf` and `PIL` (Pillow) installed (PEP 668 — use `pipx` or system packages)
-- Homebrew packages: `imagemagick`, `pandoc`, `epubcheck`
-- Node.js + `npx` (for `kdp-book-generator`)
-- An OpenRouter API key (for Gemini 3 Pro Image — set as `$OPENROUTER_API_KEY`)
-- One or more reference photos of the author (or the cover model) if any chapter scenes feature them
+**Python 3.10+** with these libraries:
+
+```bash
+pip install -r requirements.txt
+```
+
+**External CLIs** (must be on `$PATH`):
+
+- **[pandoc](https://pandoc.org/installing.html)** — Markdown → HTML/EPUB conversion (used by `build_print_pdf.py`)
+- **headless Chrome or Chromium** — HTML → PDF rendering (used by `build_print_pdf.py`). On macOS: `/Applications/Google Chrome.app/...`. On Linux: `chromium` or `google-chrome`.
+- **[ImageMagick 7+](https://imagemagick.org/script/download.php)** — provides the `magick` binary used by `compose_cover_wrap.py` for cover assembly.
+
+**API key** (for cover/chapter image generation):
+
+- `OPENROUTER_API_KEY` — used by `generate_front_cover.py`, `generate_back_cover.py`, and `generate_chapter_images.py` to call `gemini-3-pro-image-preview` via OpenRouter.
 
 ## License
 
