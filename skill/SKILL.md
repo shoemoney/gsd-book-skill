@@ -7,6 +7,8 @@ description: Use when the user wants to take a manuscript through a full KDP (Am
 
 End-to-end runbook for taking a finished manuscript through an Amazon KDP launch. The skill wraps a parameterized Python toolkit, prompt templates, and methodology docs that survived a real production launch (the "Jeremy Christ" thriller — see *Reference Implementation* at the bottom).
 
+> **Built on Get Shit Done (GSD)** by [TÂCHES](https://github.com/gsd-build) — https://github.com/gsd-build/get-shit-done. This skill assumes GSD's `/gsd-*` slash commands and `.planning/` artifact structure are available. If they aren't, install GSD first: `npx get-shit-done-cc@latest`. The framework architecture, parallel subagent dispatch, atomic-commit guarantees, and five-command workflow loop all come from GSD. This skill is a domain-specific extension that plugs into them.
+
 This skill ORCHESTRATES — it does the editorial polish, the AI image generation, the cover production, the launch-collateral packaging. It does NOT itself build the EPUB / PDF. For that it shells out to the [`kdp-book-generator`](https://www.npmjs.com/package/kdp-book-generator) Node CLI (which the user has installed at `~/.claude/skills/kdp-book-generator/`).
 
 ---

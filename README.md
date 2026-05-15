@@ -4,6 +4,31 @@
 
 A reusable [Claude skill](https://docs.claude.com/en/docs/claude-code/skills) plus a kit of standalone Python scripts. Originally extracted from the production launch of two books (*Why Winners Win* and *Jeremy Christ*) by Jeremy Schoemaker.
 
+---
+
+## ⚡ Built on GSD ⚡
+
+**This entire workflow runs on top of [Get Shit Done (GSD)](https://github.com/gsd-build/get-shit-done) by [TÂCHES](https://github.com/gsd-build).**
+
+GSD is a meta-prompting, context engineering, and spec-driven development system for Claude Code, OpenCode, Gemini CLI, Codex, Copilot, Cursor, Windsurf, and more. It provides the framework that makes book-launch-as-a-skill actually work:
+
+- `/gsd-new-project` — initializes the `.planning/` directory with PROJECT.md, REQUIREMENTS.md, ROADMAP.md, STATE.md
+- `/gsd-discuss-phase` → `/gsd-plan-phase` → `/gsd-execute-phase` → `/gsd-verify-work` → `/gsd-ship` — the five-command loop that drives every phase
+- `/gsd-autonomous` — parallel subagent dispatch with fresh 200k-token contexts and atomic commits per task
+- The agent orchestration, state management, and atomic-commit guarantees that make a 35-commit autonomous run actually safe
+
+**If you find this skill useful, the credit goes upstream.** Install GSD first:
+
+```bash
+npx get-shit-done-cc@latest
+```
+
+Then drop this skill in alongside it. GSD makes Claude Code productive; this skill teaches it to ship books.
+
+Real talk: I tried to build a launch pipeline without a framework first. It was a mess. GSD gave me the bones — phases, gates, planning artifacts, subagent dispatch — and this skill just specializes those bones for the book-launch domain. **All the hard architectural work is TÂCHES's.** Star [gsd-build/get-shit-done](https://github.com/gsd-build/get-shit-done), pay them in attention, and consider sponsoring if it ships your stuff.
+
+---
+
 ## What this is
 
 A complete pipeline that takes you from `manuscript.md` to **KDP-upload-ready files** in five phases:
@@ -127,10 +152,23 @@ Contributions welcome — see [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## Acknowledgments
 
-Built on top of:
-- [Anthropic Claude Code](https://claude.com/claude-code) — the skill system + agent dispatch
+### The skill exists because of GSD
+
+**[Get Shit Done (GSD)](https://github.com/gsd-build/get-shit-done) by [TÂCHES](https://github.com/gsd-build)** is the meta-framework this skill plugs into. Every phase, every `/gsd-*` command, every atomic commit, every parallel subagent dispatch — all GSD's design. This skill is a domain-specific extension; GSD does the heavy architectural lifting.
+
+If this skill saves you time shipping a book, the upstream debt is owed to TÂCHES. Star the repo. Sponsor the project. Tell other authors. GSD is the kind of infrastructure that disappears into the background once it works — which is exactly why it deserves louder credit.
+
+- **GSD repo**: https://github.com/gsd-build/get-shit-done
+- **GSD on npm**: `npx get-shit-done-cc@latest`
+- **Author**: TÂCHES — [@gsd-build](https://github.com/gsd-build) on GitHub
+
+### Other shoulders standing on
+
+- [Anthropic Claude Code](https://claude.com/claude-code) — the skill system + agent dispatch runtime
 - [Google Gemini 3 Pro Image](https://deepmind.google/technologies/gemini/) via [OpenRouter](https://openrouter.ai) — image generation
 - [`kdp-book-generator`](https://www.npmjs.com/package/kdp-book-generator) — markdown → KDP PDF/EPUB
-- ImageMagick, pandoc, EPUBCheck — the unsung trio
+- [Pillow (PIL)](https://pillow.readthedocs.io), [pypdf](https://pypdf.readthedocs.io), ImageMagick, pandoc, EPUBCheck — the unsung trio that turns ideas into print files
 
-Reference implementation: see the `JeremyChrist` book project (private) for a complete end-to-end production run that produced this skill.
+### Reference implementation
+
+See the `JeremyChrist` book project (private) for a complete end-to-end production run that produced this skill — 35+ commits, 21 chapter illustrations, full EPUB + paperback + hardcover builds, 54 social media graphics, launch collateral, all driven by `/gsd-autonomous`.
