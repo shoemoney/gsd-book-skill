@@ -2,10 +2,10 @@
 
 **Project:** gsd-book-skill
 **Milestone:** v1.0
-**Active phase:** 2
-**Next action:** User-approved go-ahead → file Enhancement issue on gsd-build/get-shit-done
+**Active phase:** 2 (Discussion-first variant)
+**Next action:** Wait for TÂCHES response on Discussion #3576 — do NOT file Enhancement issue until soft yes received
 **Created:** 2026-05-15
-**Last updated:** 2026-05-15 after Phase 1 verification
+**Last updated:** 2026-05-15 after opening Discussion #3576
 
 ## Progress
 - Completed: 1
@@ -22,12 +22,23 @@
 
 ## Notes
 
-- **Hard serialization:** Phase 1 → 2 → 3 → 4 is non-negotiable. Phase 2 cannot start until POLISH/AUDIT items land (reviewer will inspect repo state before approving the issue). Phase 3 cannot start until the `approved-enhancement` label is visible on the filed issue — branching the upstream fork early, editing upstream files, or opening a draft PR will trigger auto-close.
-- **Issue number capture:** Phase 2 must write the returned GitHub issue number here before Phase 3 begins. All downstream `<issue#>` substitutions (commit message `docs(<issue#>): ...`, PR title, PR body `Closes #N`, changeset fragment filename and frontmatter) resolve from that single value.
-  - `<issue#>` = _TBD (set in Phase 2)_
-- **PR number capture:** When the PR is opened in Phase 3, record its number here. If it differs from the `--pr` value baked into the changeset at generation time, Phase 3 must land a follow-up `chore: pin changeset pr field to #<PR#>` commit.
+- **Strategy change (2026-05-15):** Phase 2 was originally "File Enhancement Issue" per ROADMAP. The prepared materials in `.planning/gsd-pr/STEP1_DISCUSSION_POST.md` were drafted for a Discussion-first path (open Discussion → wait for soft yes from TÂCHES → THEN file Enhancement issue → THEN PR). Adopted the Discussion-first path on user direction. Roadmap is now de facto: Phase 1 ✅ → Phase 2a Discussion (opened #3576) → Phase 2b file Enhancement issue if yes → Phase 3 PR → Phase 4 review iteration.
+- **Discussion #3576 (opened 2026-05-15):**
+  - URL: https://github.com/gsd-build/get-shit-done/discussions/3576
+  - ID: `D_kwDOQojJX84AmbMG` (GraphQL node ID)
+  - Category: General
+  - Title: "Listing a third-party Claude Code skill in the Community table — welcome?"
+  - Body: copy of `.planning/gsd-pr/STEP1_DISCUSSION_POST.md` with backslash-escapes stripped from the diff fence
+  - Status: awaiting TÂCHES response
+- **Hard serialization:** Phase 2 → 3 → 4 still non-negotiable post-Discussion. The Enhancement issue cannot be filed until a TÂCHES "yes" (or constructive feedback) appears on Discussion #3576. The PR cannot be opened until the Enhancement issue carries `approved-enhancement`. Branching upstream fork early, editing upstream files, or opening a draft PR triggers auto-close.
+- **Discussion watchpoints (Phase 2a):**
+  - day-5 (2026-05-20): minimum wait before any nudge — STEP1 doc says "Don't bump it for at least 5 business days"
+  - day-10 (2026-05-25): polite Discord nudge OK if no response, per STEP1 P.S.
+  - day-21+: re-evaluate — Discussions don't have a stale-bot auto-close, but extended silence = soft no
+- **Issue number capture:** When the Enhancement issue is filed (Phase 2b after soft yes), record number here. All downstream `<issue#>` substitutions (commit message `docs(<issue#>): ...`, PR title, PR body `Closes #N`, changeset fragment filename and frontmatter) resolve from that single value.
+  - `<issue#>` = _TBD (set when Enhancement issue is filed)_
+- **PR number capture:** When the PR is opened in Phase 3, record number here. If it differs from the `--pr` value baked into the changeset at generation time, Phase 3 must land a follow-up `chore: pin changeset pr field to #<PR#>` commit.
   - `<PR#>` = _TBD (set in Phase 3)_
 - **Approval SHA capture:** Phase 4 DoD = approving review from a maintainer-tier account. Record the approval comment SHA here as the milestone-close signal.
   - `<approval-sha>` = _TBD (set in Phase 4)_
-- **Stale-bot watchpoints (Phase 2):** day-14 (Discord nudge if no activity), day-28 (stale label expected to appear), day-42 (auto-close — trigger Path-4 fallback per `.planning/gsd-pr/SUBMISSION_RUNBOOK.md`). Set calendar reminders when the issue is filed.
-- **DoD reminder:** Milestone closes on approving review, NOT on merge. Maintainer controls merge cadence; do not couple our timeline to theirs.
+- **DoD reminder:** Milestone closes on approving review of the PR, NOT on merge. Maintainer controls merge cadence; do not couple our timeline to theirs.
