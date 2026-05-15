@@ -1,0 +1,1 @@
+docs(NNNN): list gsd-book-skill in Community table

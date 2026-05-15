@@ -36,6 +36,8 @@ DO NOT load this skill for:
 
 Detailed checklist at `references/phase-checklist.md`. Each phase has author-approval gates. The hard-cost gate is Phase 2 (OpenRouter API spend on chapter images).
 
+**Driving this via GSD:** initialize the project with `/gsd-new-project` (creates `.planning/PROJECT.md`, `REQUIREMENTS.md`, `ROADMAP.md`, `STATE.md` with one roadmap phase per phase below). From there, the loop is `/gsd-discuss-phase N` → `/gsd-plan-phase N` → `/gsd-execute-phase N` → `/gsd-verify-work N` per phase, or `/gsd-autonomous` to run end-to-end with parallel subagent dispatch and atomic per-task commits. The author-approval gates in each phase below are the natural `/gsd-verify-work` checkpoints.
+
 ```
 PHASE 1 — Manuscript Lock          (editorial read + canon audit, $0)
    ↓
