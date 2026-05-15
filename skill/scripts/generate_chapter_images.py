@@ -77,7 +77,7 @@ def call_api(api_key: str, prompt: str, ref_paths: list[Path], title: str):
         headers={
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
-            "HTTP-Referer": "https://github.com/local/kdp-book-launch",
+            "HTTP-Referer": "https://github.com/shoemoney/gsd-book-skill",
             "X-Title": f"{title} chapter illustration",
         },
         method="POST",
