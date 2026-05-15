@@ -133,21 +133,32 @@ cd ~/Projects/my-book
 
 ## Requirements
 
+**OS:** macOS or Linux. Developed on macOS; should work on Linux with the same brew/apt tooling. Windows is not currently supported (some scripts hardcode macOS font paths).
+
 **Python 3.10+** with these libraries:
 
 ```bash
 pip install -r requirements.txt
 ```
 
+(`Pillow` and `pypdf`. See [`requirements.txt`](./requirements.txt) and [`pyproject.toml`](./pyproject.toml) for exact versions. On systems with PEP 668 enforcement, use `pipx` or a virtualenv.)
+
 **External CLIs** (must be on `$PATH`):
 
-- **[pandoc](https://pandoc.org/installing.html)** — Markdown → HTML/EPUB conversion (used by `build_print_pdf.py`)
+- **[pandoc](https://pandoc.org/installing.html)** — Markdown → HTML conversion (used by `build_print_pdf.py`)
 - **headless Chrome or Chromium** — HTML → PDF rendering (used by `build_print_pdf.py`). On macOS: `/Applications/Google Chrome.app/...`. On Linux: `chromium` or `google-chrome`.
 - **[ImageMagick 7+](https://imagemagick.org/script/download.php)** — provides the `magick` binary used by `compose_cover_wrap.py` for cover assembly.
+- **[epubcheck](https://www.w3.org/publishing/epubcheck/)** — EPUB validator (`brew install epubcheck` on macOS).
+- **Node.js + `npx`** — required to invoke [`kdp-book-generator`](https://www.npmjs.com/package/kdp-book-generator), the separate Node CLI this skill orchestrates for EPUB packaging.
 
 **API key** (for cover/chapter image generation):
 
 - `OPENROUTER_API_KEY` — used by `generate_front_cover.py`, `generate_back_cover.py`, and `generate_chapter_images.py` to call `gemini-3-pro-image-preview` via OpenRouter.
+
+**Inputs you supply:**
+
+- Your manuscript (as `chapters/NN-slug.md` files; see [`examples/`](./examples/))
+- One or more reference photos of the author (or the cover model) if any chapter scenes feature them — passed to the image-gen prompts for likeness anchoring
 
 ## License
 
