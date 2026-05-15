@@ -8,16 +8,14 @@ This is the entire diff for the PR. **One file. One row added. No other changes.
 
 ## Insertion point
 
-Section `## Community`, line 239+ in the current `main` HEAD (`a7f0af2c`). The new row goes BETWEEN the existing `gsd-opencode` row and the `Discord` row. This positions third-party projects together and keeps the Discord chat-link as the last entry (matches the original ordering intent).
+Section `## Community` (heading at line 239 in current upstream `main`), with the table body on lines 241–244 (header at 241, separator at 242, `gsd-opencode` row at 243, `Discord` row at 244). The new row goes BETWEEN the existing `gsd-opencode` row and the `Discord` row. This positions external/community-authored projects together and keeps the Discord chat-link as the last entry (matches the original ordering intent).
 
 ## Unified diff
 
 ```diff
 --- a/README.md
 +++ b/README.md
-@@ -240,6 +240,7 @@
- | Project | Platform |
- |---------|----------|
+@@ -243,2 +243,3 @@
  | [gsd-opencode](https://github.com/rokicool/gsd-opencode) | Original OpenCode port |
 +| [gsd-book-skill](https://github.com/shoemoney/gsd-book-skill) | Claude Code skill — KDP book launch pipeline |
  | [Discord](https://discord.gg/mYgfVNfA2r) | Community support |
