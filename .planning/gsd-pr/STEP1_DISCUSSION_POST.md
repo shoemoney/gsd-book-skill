@@ -27,8 +27,10 @@ shape, the wave-based `execute-phase`, the atomic commits — it just works.
 Writing to ask a yes/no question before doing any work.
 
 **The ask:** would a single-row addition to the `## Community` table in
-`README.md` be welcome, pointing to a third-party Claude Code skill that's
-built on GSD?
+`README.md` be welcome, pointing to an external project — a community-authored
+Claude Code skill — that uses GSD as documented? Zero maintenance burden on
+you: the skill lives in its own repo with its own maintainer, and the only
+thing landing in your repo is one table row.
 
 **The skill — gsd-book-skill:**
 - Repo: https://github.com/shoemoney/gsd-book-skill
@@ -38,10 +40,12 @@ built on GSD?
   KDP launch — editorial review and canon audit, AI chapter art, cover
   production (front + back + spine), EPUB + paperback + hardcover compile,
   social pack, launch collateral.
-- Built on GSD: initializes via `/gsd-new-project`, drives phases through the
-  discuss → plan → execute → verify loop, supports `/gsd-autonomous`
-  end-to-end. The skill's `SKILL.md` credits GSD prominently at the top and
-  links to your repo.
+- Uses GSD as documented: initializes via `/gsd-new-project`, drives phases
+  through the discuss → plan → execute → verify loop, supports
+  `/gsd-autonomous` end-to-end. The skill's `SKILL.md` credits GSD
+  prominently at the top and links to your repo. A conformance audit in the
+  skill's repo confirms `.planning/` artifact discipline, atomic commits,
+  and wave-based execution match GSD's contract.
 - Trigger words are all book-launch-specific — zero overlap with GSD core
   commands.
 - Production-verified across two real KDP launches before being extracted as
