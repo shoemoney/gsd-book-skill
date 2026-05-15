@@ -1,0 +1,37 @@
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+.python-version
+
+# Generated artifacts (these should never be committed to this repo — they're
+# per-book and live in the user's own project directories)
+dist/
+images/chapters/
+images/chapters-bw/
+images/.DS_Store
+covers/*.jpg
+covers/*.png
+covers/archive/
+social/
+
+# Local API key files (the user's own; don't track)
+.keys
+.env
+
+# Logs
+*.log
+/tmp/regen.log
+
+# OpenRouter response dumps
+/tmp/back-cover-response.json

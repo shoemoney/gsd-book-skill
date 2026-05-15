@@ -1,0 +1,117 @@
+# gsd-book-skill
+
+> Take a markdown manuscript through a complete Amazon KDP launch — editorial review, AI-generated chapter illustrations, cover art with title baked in, EPUB + paperback + hardcover builds, full cover wraps, bonus PDFs, social media graphic pack, and launch collateral — all from your terminal.
+
+A reusable [Claude skill](https://docs.claude.com/en/docs/claude-code/skills) plus a kit of standalone Python scripts. Originally extracted from the production launch of two books (*Why Winners Win* and *Jeremy Christ*) by Jeremy Schoemaker.
+
+## What this is
+
+A complete pipeline that takes you from `manuscript.md` to **KDP-upload-ready files** in five phases:
+
+| Phase | What happens | What you get |
+|------:|--------------|--------------|
+| 1 | **Manuscript Lock** — editorial pass, continuity audit, family/character canon, structural cleanup, religion/voice audit | Locked manuscript at agreed final state |
+| 2 | **Chapter Illustrations** — one AI image per chapter, consistent likeness, color + B&W variants | `images/chapters/*.png` (color for ebook) + `images/chapters-bw/*.png` (print) |
+| 3 | **Cover Production** — front cover (title + tagline + author credits baked in by AI), back cover (full blurb baked in), spine | `covers/front-cover.jpg`, `covers/back-cover.jpg` |
+| 4 | **Build & Compile** — KDP EPUB (validated by EPUBCheck), paperback PDF, hardcover PDF, full cover wrap PDFs at KDP dimensions, bonus visual companion PDF | `dist/*.epub`, `dist/*-paperback.pdf`, `dist/*-paperback-wrap.pdf`, etc. |
+| 5 | **Launch Prep** — KDP listing copy, press release, subscriber email, blog post, Goodreads listing, A+ Content, Amazon Ads, social media pack | `social/` (~54 graphics) + `.planning/launch/*.md` |
+
+The skill is **genre-agnostic** — works for thrillers, memoirs, self-help, fiction, nonfiction. The aesthetic templates (Da Vinci Code / Roger Deakins / etc.) are swappable.
+
+## Who this is for
+
+- Indie authors using [Claude Code](https://claude.com/claude-code) or the Claude API
+- Writers who have a finished manuscript and want to ship to KDP themselves
+- Anyone tired of paying $3,000+ for a cover designer and $1,500+ for an editor when AI can do the first 80% and you can iterate on the last 20%
+
+## What it costs
+
+| Component | Where it spends | Per book |
+|-----------|----------------|---------|
+| Chapter illustrations | OpenRouter Gemini 3 Pro Image | ~$0.14/image × N chapters = **$3–5** |
+| Cover art (front + back) | OpenRouter Gemini 3 Pro Image | ~$0.30 |
+| Editorial pass (subagent) | Anthropic API / Claude Code allowance | Free if you have Pro/Max, otherwise ~$2–5 |
+| Build pipeline | Local (free) | $0 |
+| Social media pack | Local (PIL only) | $0 |
+| Press release / launch collateral | Anthropic API / Claude Code allowance | Free if you have Pro/Max |
+
+**Total OpenRouter spend for a 21-chapter book: ~$4.** (Verified production cost.)
+
+## What the skill provides
+
+**Skill content** at `skill/SKILL.md` — Claude loads this when you ask it to launch a book on KDP. Walks Claude through the 5-phase workflow with clear gates for user decisions.
+
+**Scripts** at `scripts/`:
+
+| Script | Purpose |
+|--------|---------|
+| `generate_chapter_images.py` | OpenRouter Gemini 3 Pro Image generator with multi-ref support (`NO_REF_SLUGS`, `STRONG_REFS`, `CUSTOM_REFS`) |
+| `generate_front_cover.py` | Front cover with title text baked in |
+| `generate_back_cover.py` | Back cover with full blurb baked in |
+| `make_bw_variants.py` | Color → B&W variants for print interior (ImageMagick) |
+| `build_visual_companion.py` | Bonus PDF assembly (PIL) |
+| `build_book_md.py` | Manuscript → kdp-book-generator input, with `--print` flag for B&W image swap |
+| `epub_embed_images.py` | Bundle image files into KDP-built EPUBs (KDP's tool doesn't do this) |
+| `build_print_pdf.py` | Pandoc → Chrome headless → PDF fallback for the print build |
+| `compose_cover_wrap.py` | Full paperback + hardcover wrap PDFs at KDP dimensions |
+| `build_social_pack.py` | 50+ social media graphics (PIL only, no API spend) |
+
+**Templates** at `templates/` — prompt templates (chapter image / cover / editorial / KDP listing) that you fill in for your book.
+
+**References** at `references/` — methodology docs that explain how and why:
+
+- `editorial-review-methodology.md` — HIGH/MEDIUM/LOW severity classification
+- `likeness-audit-methodology.md` — auditing AI image consistency against ref photos
+- `canon-audit-methodology.md` — family canon and religion canon audits
+- `cover-regen-troubleshooting.md` — recovering when the model produces hair on a bald protagonist, etc.
+- `kdp-specifications.md` — trim sizes, spine widths, bleed dimensions
+- `prompt-structure-guide.md` — writing image prompts that work
+- `aesthetic-libraries.md` — style blocks for different genres
+- `phase-checklist.md` — copy-paste task list for the 5 phases
+
+**Examples** at `examples/` — generic walkthroughs using a placeholder demo book (no real manuscripts included).
+
+## Getting started
+
+```bash
+# Clone the repo
+git clone https://github.com/shoemoney/gsd-book-skill ~/gsd-book-skill
+
+# Install the skill at the user level (or symlink for development)
+ln -s ~/gsd-book-skill/skill ~/.claude/skills/gsd-book-skill
+
+# In your book project, start the workflow
+cd ~/Projects/my-book
+# Then in Claude Code:
+#   "Launch my book on KDP"
+# Claude will load this skill and walk you through the 5 phases.
+```
+
+## Requirements
+
+- macOS or Linux (developed on macOS; should work on Linux with same brew/apt tooling)
+- Python 3.10+ with `pypdf` and `PIL` (Pillow) installed (PEP 668 — use `pipx` or system packages)
+- Homebrew packages: `imagemagick`, `pandoc`, `epubcheck`
+- Node.js + `npx` (for `kdp-book-generator`)
+- An OpenRouter API key (for Gemini 3 Pro Image — set as `$OPENROUTER_API_KEY`)
+- One or more reference photos of the author (or the cover model) if any chapter scenes feature them
+
+## License
+
+MIT — see [LICENSE](./LICENSE).
+
+## Roadmap & contributing
+
+See [TASKS.md](./TASKS.md) for the OSS-prep task list and roadmap items.
+
+Contributions welcome — see [CONTRIBUTING.md](./CONTRIBUTING.md).
+
+## Acknowledgments
+
+Built on top of:
+- [Anthropic Claude Code](https://claude.com/claude-code) — the skill system + agent dispatch
+- [Google Gemini 3 Pro Image](https://deepmind.google/technologies/gemini/) via [OpenRouter](https://openrouter.ai) — image generation
+- [`kdp-book-generator`](https://www.npmjs.com/package/kdp-book-generator) — markdown → KDP PDF/EPUB
+- ImageMagick, pandoc, EPUBCheck — the unsung trio
+
+Reference implementation: see the `JeremyChrist` book project (private) for a complete end-to-end production run that produced this skill.
