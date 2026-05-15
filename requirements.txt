@@ -1,0 +1,6 @@
+# Runtime dependencies for kdp-book-launch (gsd-book-skill).
+# Requires: Python 3.10+
+# External CLIs (not pip-installable): pandoc, headless Chrome/Chromium, ImageMagick 7+ (magick binary)
+
+Pillow>=10.0
+pypdf>=4.0
